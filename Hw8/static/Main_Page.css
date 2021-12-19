@@ -1,0 +1,38 @@
+css
+
+bodt{
+    background-color:rgb(240, 250, 247);
+}
+
+#GridContainer {
+    display: grid;
+    grid-template-areas:
+     'header header header'
+     'left main main'
+     'left main main'
+}
+
+#item1{
+    grid-area: header;
+    width: 100%;
+    background-color: rgb(194, 221, 219);
+    height: 33vh;
+    
+}
+
+#item2{
+    grid-area: left;
+    width: 100%;
+    background-color: rgb(94, 96, 97);
+    height: 66vh;
+}
+
+
+#item3{
+    grid-area: main;
+    width:100%;
+    background-color: rgb(255, 255, 255);
+    height:66vh;
+}
+
+
