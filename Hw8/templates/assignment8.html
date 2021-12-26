@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hobbies_Page</title>
-</head>
-<body>
-    {% include 'header.html' %}
-    <h1>Welcome to hobbies page!</h1>
+{% extends 'base.html' %}
+
+{% block title %}
+Hobbies_Page
+{% endblock %}
+
+{% block tohen %}
+    {{ super() }}
+  <h1>Welcome to hobbies page!</h1>
     <h2>Name: {{ name | default('unknown', true) }} {{ second_name }}</h2>
     <h2>Hobby: {{ Hobby | default('Drink water', true)}}</h2>
 
@@ -26,6 +26,4 @@
     {% for i in range(11) %}
     {{ i }}
     {% endfor %}
-
-</body>
-</html>
+{% endblock %}

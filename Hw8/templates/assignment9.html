@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{%block Form %}
+Form
+{% endblock %}
+
+{% block tohen %}
+<h2>Welcome to Form page </h2>
+
+<form action="/assignment9" method="GET">     <!-- Back to the same page -->
+    Username:<input name="username" type="text">
+    <input type="submit">
+</form>
+
+<br>
+
+{% if username %}
+    <h3>Welcome, {{ username }}!</h3>
+{% else %}
+    <h1> Please make registration</h1>
+    <form action="/assignment9" method="POST" >     <!-- Back to the same page -->
+    Username:<input name="username1" type="text" >
+    LastName:<input name="LastName1" type="text">
+    Email:<input name="Email1" type="email" >
+    <input type="submit">
+</form>
+{% endif %}
+
+
+<h3> {{p_user}}</h3>
+{% endblock %}
+
