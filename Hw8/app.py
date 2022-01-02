@@ -2,8 +2,10 @@ from flask import Flask, redirect, url_for
 from flask import render_template
 from flask import request
 from flask import session
+from interact_with_DB import interact_db
 
 app2 = Flask(__name__)
+
 
 
 @app2.route('/')
@@ -47,6 +49,17 @@ Users = {'user1': {'first_name': 'Yossi', 'last_name': 'Cohen', 'email': 'Y@gmai
          'roeeGur':{'first_name': 'Roee', 'last_name': 'Gur', 'email': 'RoeeGur@gmail.com'},
          'Pedro':{'first_name': 'Pedro', 'last_name': 'Gur', 'email': 'PedroTheDog@gmail.com'},
          'ShoshanaX':{'first_name': 'Shoshana', 'last_name': 'The Neighbor', 'email': 'Shoshi@gmail.com'}}
+
+from assignment10.assignment10 import assignment10
+app2.register_blueprint(assignment10)
+
+@app2.route('/assignment10')
+def assignment10_func():
+    query = 'select * from users;'
+    users = interact_db(query=query, query_type='fetch')
+    return render_template('assignment10.html', users=users)
+
+
 
 if __name__ == '__main__':
     app2.run(debug=True)

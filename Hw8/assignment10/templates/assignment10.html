@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{%block Form %}
+Form
+{% endblock %}
+
+
+
+{% block tohen %}
+    <h1>User page</h1>
+    <h2>Insert form:</h2>
+    <form action="/insert_user" method="post">
+          <input type="text" name="name" placeholder="Name">
+          <input type="text" LastN="LastN" placeholder="Last name">
+          <input type="text" email="email" placeholder="Email">
+          <input type="submit" value="Insert">
+    </form>
+    <hr>
+    <h2>Users list:</h2>
+    <ul>
+       {% for users in assignment10 %}
+         <li> {{ user.name }}, Email: {{ user.email }}</li>
+       {% endfor %}
+    </ul>
+{% endblock %}
+
+
+
+
+
+
+
+
+
