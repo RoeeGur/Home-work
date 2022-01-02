@@ -7,7 +7,6 @@ from interact_with_DB import interact_db
 app2 = Flask(__name__)
 
 
-
 @app2.route('/')
 def Main_Page_fanc():
     return render_template('Main_Page.html')
@@ -34,9 +33,9 @@ def Form_func():
     username = ""
     if user is None:
         p = Users
-    elif Users.get(user,'Not Found') != 'Not Found':
+    elif Users.get(user, 'Not Found') != 'Not Found':
         p = Users[user]
-    elif Users.get(user,'Not Found') == 'Not Found':
+    elif Users.get(user, 'Not Found') == 'Not Found':
         p = 'Not found in the system'
 
     if request.method == 'POST':
@@ -44,21 +43,27 @@ def Form_func():
         session['username'] = username
     return render_template('assignment9.html', p_user=p, username=username)
 
+
 Users = {'user1': {'first_name': 'Yossi', 'last_name': 'Cohen', 'email': 'Y@gmail.com'},
-         'user2':{'first_name': 'Noa', 'last_name': 'Radin', 'email': 'NoaTheQueen@gmail.com'},
-         'roeeGur':{'first_name': 'Roee', 'last_name': 'Gur', 'email': 'RoeeGur@gmail.com'},
-         'Pedro':{'first_name': 'Pedro', 'last_name': 'Gur', 'email': 'PedroTheDog@gmail.com'},
-         'ShoshanaX':{'first_name': 'Shoshana', 'last_name': 'The Neighbor', 'email': 'Shoshi@gmail.com'}}
+         'user2': {'first_name': 'Noa', 'last_name': 'Radin', 'email': 'NoaTheQueen@gmail.com'},
+         'roeeGur': {'first_name': 'Roee', 'last_name': 'Gur', 'email': 'RoeeGur@gmail.com'},
+         'Pedro': {'first_name': 'Pedro', 'last_name': 'Gur', 'email': 'PedroTheDog@gmail.com'},
+         'ShoshanaX': {'first_name': 'Shoshana', 'last_name': 'The Neighbor', 'email': 'Shoshi@gmail.com'}}
 
 from assignment10.assignment10 import assignment10
 app2.register_blueprint(assignment10)
 
-@app2.route('/assignment10')
-def assignment10_func():
-    query = 'select * from users;'
-    users = interact_db(query=query, query_type='fetch')
-    return render_template('assignment10.html', users=users)
 
+# @app2.route('/insert_user')
+# def insert_user_func():
+#     name = request.form['name']
+#     LastN = request.form['LastN']
+#     email = request.form['email']
+#
+#     query = "INSERT INTO user(name, LastN, email) VALUES ('%s' , '%s' , '%s')" % (name, LastN, email)
+#     interact_db(query=query, query_type='commit')
+#
+#     return redirect('/assignment10')
 
 
 if __name__ == '__main__':
