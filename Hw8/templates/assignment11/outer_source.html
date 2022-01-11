@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{%block Form %}
+Form
+{% endblock %}
+
+{% block tohen %}
+<script src="../../static/fetch_example.js"></script>
+    <h2>Req Fronted </h2>
+    <h2>Users list <button onclick="getUsers()">Get Users</button></h2>
+    <main>
+
+    </main>
+    <h2>Insert form:</h2>
+    <form action="/assignment11/outer_source" method="post">
+          <input type="text" id="id" placeholder="id">
+          <input type="submit" value="Insert">
+    </form>
+
+<h1>Req Backend</h1>
+    <h2>Users</h2>
+    <form action="/req_backend">
+        <input type="number" name="number">
+        <input type="submit" value="Sync - Get User">
+    </form>
+    {% if User %}
+      <h3> First Name: {{ User.data.first_name }}</h3>
+      <h3> Last Name: {{ User.data.last_name }}</h3>
+      <h3> Email: {{ User.data.email }}</h3>
+    {% endif %}
+    <br>
+
+
+{% endblock %}
+
+
+
+

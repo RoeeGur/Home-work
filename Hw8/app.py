@@ -1,8 +1,13 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, jsonify
 from flask import render_template
 from flask import request
 from flask import session
+from torch import res
+
+
 from interact_with_DB import interact_db
+import requests
+import random
 
 app2 = Flask(__name__)
 
@@ -54,16 +59,38 @@ from assignment10.assignment10 import assignment10
 app2.register_blueprint(assignment10)
 
 
-# @app2.route('/insert_user')
-# def insert_user_func():
-#     name = request.form['name']
-#     LastN = request.form['LastN']
-#     email = request.form['email']
-#
-#     query = "INSERT INTO user(name, LastN, email) VALUES ('%s' , '%s' , '%s')" % (name, LastN, email)
-#     interact_db(query=query, query_type='commit')
-#
-#     return redirect('/assignment10')
+# @app2.route('/assignment11/users')
+# def Users_func():
+#     return render_template('assignment11/users.html')
+
+@app2.route('/assignment11/outer_source')
+def Reqest_func():
+    return render_template('assignment11/outer_source.html')
+
+def get_User(num):
+    res = requests.get(f'https://reqres.in/api/users/{num}')
+    res = res.json()
+    return res
+
+@app2.route('/req_backend')
+def req_backend_func():
+    num = int(request.args['number'])
+    User = get_User(num)
+    return render_template('assignment11/outer_source.html', User=User)
+
+
+@app2.route('/assignment11/users')
+def users_func():
+    return_dict = {}
+    query = 'select * from users;'
+    users = interact_db(query=query, query_type='fetch')
+    for user in users:
+        return_dict[f'user_{user.id}'] = {
+            'id': user.id,
+            'name': user.name,
+            'email': user.email
+        }
+    return jsonify(return_dict)
 
 
 if __name__ == '__main__':
