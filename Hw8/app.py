@@ -92,6 +92,26 @@ def users_func():
         }
     return jsonify(return_dict)
 
+@app2.route('/assignment12/restapi_users', defaults={ 'USER_ID': 2})
+@app2.route('/assignment12/restapi_users/<int:USER_ID>')
+def get_user_db(USER_ID):
+    user_query= 'SELECT * FROM users WHERE id=%s;' % USER_ID
+    user =  interact_db(query=user_query, query_type='fetch')
+    if len(user) == 0:
+        user_dict = {
+            'status': 'Failed',
+            'message': 'User Not Found'
+        }
+    else:
+        user_dict = {
+            'status': 'Success',
+            'id': user[0].id,
+            'name': user[0].name,
+            'email': user[0].email
+            }
+    return jsonify(user_dict)
+
+
 
 if __name__ == '__main__':
     app2.run(debug=True)
